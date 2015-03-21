@@ -1,0 +1,25 @@
+.divider {
+    border-left:1px solid #38546d; 
+    height:50%;
+    position:absolute;
+    right:51.5%;
+    top:3%;
+}
+
+.signup {
+	float:left;
+	width:50%;
+}
+
+.login {
+	float:right;
+	width:50%;
+}
+
+.round {
+	border-radius: 10px 10px 10px 10px;
+}
+
+
+
+	
