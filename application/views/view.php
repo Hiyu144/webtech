@@ -9,4 +9,7 @@
 	<div>
 		<input onClick="this.select();" type="text" value="<?php echo site_url('/pictoria/view') . "/" . $imgpage; ?>" />
 	</div>
+	<div>
+		<?php echo $visit; ?>
+	</div>
 </html>
