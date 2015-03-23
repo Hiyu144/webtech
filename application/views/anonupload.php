@@ -2,9 +2,11 @@
 	<head>
 		<link href="<?php echo base_url(); ?>resources/css/dropzone.css" type="text/css" rel="stylesheet" />
 		<script src="<?php echo base_url(); ?>resources/dropzone.js"></script>
+		<button onclick="window.location.href='<?php echo site_url('/pictoria/index/') ?>'">Home</button>
+		<button onclick="window.location.href='<?php echo site_url('/pictoria/up/') ?>'">Upload</button>
+		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
 	</head>
 	<body>
-		<h1>ADD SOME NAVIGATION HERE</h1>
 		<form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>
 		<button id="submit-all">Submit all files</button>
 		<button onclick="reload()">Refresh page</button><br><br>
