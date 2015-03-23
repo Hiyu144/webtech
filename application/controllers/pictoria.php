@@ -3,10 +3,12 @@
 class Pictoria extends CI_Controller {
 	
 	public function index() {
+		$this->load->view('header');
 		$this->load->view('homepage');
 	}
 	
 	public function signup(){
+		$this->load->view('header');
 		$name = $_POST['name'];
 		$uname = $_POST['uname'];
 		$pass = $_POST['password'];
@@ -41,6 +43,7 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function join(){
+		$this->load->view('header');
 		$this->load->view('join');
 	}
 	
@@ -79,6 +82,7 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function album() {
+		$this->load->view('header');
 		$this->load->view('album');
 	}
 	
