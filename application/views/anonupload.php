@@ -1,12 +1,12 @@
 <html>
 	<head>
-		<title>Pictoria!!!</title>		
-		<script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+		<title>Pictoria!!!</title>
+		<link href="<?php echo base_url('resources/css/dropzone.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('resources/css/bootstrap.min.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('resources/css/font-awesome.min.css') ?>" rel="stylesheet">				
+		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
 		<script src="<?php echo base_url('resources/dropzone.js') ?>"></script>
-		<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/index/') ?>'">Home</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/up/') ?>'">Upload</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
+		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>		
 	</head>
 	<body>
 		<div class="container">

@@ -1,12 +1,11 @@
 <html>
 	<head>
 		<title>Pictoria!!!</title>
-		<link href="<?php echo base_url(); ?>resources/css/dropzone.css" type="text/css" rel="stylesheet" 
-		<script src="<?php echo base_url(); ?>resources/dropzone.js"></script>
-		<link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
-		<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
-		<script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
-		<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+		
+		<link href="<?php echo base_url('resources/css/bootstrap.min.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('resources/css/font-awesome.min.css') ?>" rel="stylesheet">
+		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
+		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 		
 	</head>
 		<body>
@@ -26,7 +25,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="http://localhost/ci/index.php/up">Upload</a></li>
+						<li><a href="http://localhost/ci/index.php/pictoria/up">Upload</a></li>
 						<li><a href="http://localhost/ci/index.php/pictoria/join">Signup/Login</a></li>
 					</ul>
 					<!-- <form class="navbar-form navbar-left" role="search">
@@ -47,7 +46,7 @@
 							</ul>
 						</li>
 					</ul> -->
-				</div><!-- /.navbar-collapse -->
+				</div><!-- /.navbar-collapsezzzz -->
 			</nav>
 			</div>
 		</body>

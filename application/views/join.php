@@ -3,13 +3,10 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>resources/css/style.css">
 	<title>Let's Play</title>
-	<div>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/index/') ?>'">Home</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/up/') ?>'">Upload</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
-	</div>
+	
 </head>
 <body>
+	<div class="container">
 	<div class="divider"></div>
 	<div class="signup">
 		<h2>CREATE NEW ACCOUNT</h2>
@@ -98,5 +95,6 @@
 			}
 		}
 	</script>
+	</div>
 </body>
 </html>	

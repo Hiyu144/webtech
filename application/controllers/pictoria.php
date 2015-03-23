@@ -73,6 +73,7 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function up() {
+		$this->load->view('header');
 		session_start();
 		if (isset($_SESSION['username'])){
 			$this->load->view('memupload');
