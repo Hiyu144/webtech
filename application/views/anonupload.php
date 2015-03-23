@@ -7,6 +7,7 @@
 		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
 	</head>
 	<body>
+		<p>Welcome guest</p>
 		<form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>
 		<button id="submit-all">Submit all files</button>
 		<button onclick="reload()">Refresh page</button><br><br>

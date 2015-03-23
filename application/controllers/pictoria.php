@@ -90,29 +90,27 @@ class Pictoria extends CI_Controller {
 	
 	public function upload() {
 		session_start();
-		if (isset($_SESSION['username'])){
-			if (!empty($_FILES)) {
-				$dump = $_FILES['file']['name'];
-				$tempFile = $_FILES['file']['tmp_name'];
-				$ext = pathinfo($dump, PATHINFO_EXTENSION);
-				$imgPage = uniqid();
-				$fileName = $imgPage. '.' .$ext;
-				$targetPath = getcwd() . '/uploads/' . $_SESSION['username'] . "/";
-				$targetFile = $targetPath . $fileName;
-				move_uploaded_file($tempFile, $targetFile);
-			}
-		}else{
-			if (!empty($_FILES)) {
-				$dump = $_FILES['file']['name'];
-				$tempFile = $_FILES['file']['tmp_name'];
-				$ext = pathinfo($dump, PATHINFO_EXTENSION);
-				$imgPage = uniqid();
-				$fileName = $imgPage. '.' .$ext;
+		if (!empty($_FILES)) {
+			$dump = $_FILES['file']['name'];
+			$tempFile = $_FILES['file']['tmp_name'];
+			$ext = pathinfo($dump, PATHINFO_EXTENSION);
+			$imgPage = uniqid();
+			$fileName = $imgPage. '.' .$ext;
+			if (isset($_SESSION['username'])){
+				$targetPath = '/uploads/' . $_SESSION['username'] . "/";
+				$key = 0;
+			}else{
+				$targetPath = '/uploads/anon/';
 				$key = uniqid();
-				$targetPath = getcwd() . '/uploads/anon/';
-				$targetFile = $targetPath . $fileName ;
-				move_uploaded_file($tempFile, $targetFile);
-				$this->db->insert('images', array('linkimg' => $fileName, 'keyimg' => $key, 'imgpage' => $imgPage, 'visit' => 0));
+			}
+			$targetFile = getcwd() . $targetPath . $fileName;
+			move_uploaded_file($tempFile, $targetFile);
+			$this->db->insert('images', array('linkimg' => $fileName,
+											  'pathimg' => $targetPath,
+											  'keyimg' => $key, 
+											  'imgpage' => $imgPage, 
+											  'visit' => 0));
+			if (!isset($_SESSION['username'])){
 				$response = $fileName . '@' . $key . '-' . $imgPage;
 				echo $response;
 			}

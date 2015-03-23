@@ -7,11 +7,11 @@
 	</head>
 	<?php session_start(); ?>
 	<div>
-		<img src="<?php echo '../../../uploads/anon/' . $linkimg; ?> " />
+		<img src="<?php echo '../../..' . $pathimg . $linkimg; ?> " />
 	</div>
 	<div>
 		<p>Direct Link</p>
-		<input onClick="this.select();" type="text" value="<?php echo 'http://localhost/ci/uploads/anon/' . $linkimg; ?>" />
+		<input onClick="this.select();" type="text" value="<?php echo 'http://localhost/ci' . $pathimg . $linkimg; ?>" />
 	</div>	
 	<div>
 		<p>Page Link</p>
@@ -21,8 +21,6 @@
 		<p>Views: <?php echo $visit; ?></p>
 	</div>
 	<?php if (isset($_SESSION['username'])){
-		echo $_SESSION['username'];
 		echo "<button onclick='location.href=\"" . site_url('/pictoria/cool/') . "\"'>Cool!</button>" . "</br>";
-		echo "<a href='" . site_url('/pictoria/logout/') . "'>Log out</a>";
 	} ?>
 </html>
