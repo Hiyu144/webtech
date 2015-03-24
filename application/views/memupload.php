@@ -7,9 +7,17 @@
 		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
 		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
-	<body>
-		<div class="container"><p>Welcome, <?php echo $_SESSION['username'];?>.    
-		   <a href='<?php echo site_url('/pictoria/logout/') ?>'> Log out</a></p>
+	<body>		
+		<div class="container">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Welcome, <?php echo $_SESSION['username'];?>.</h3>
+		  </div>
+		  <div class="panel-body"> Where do we go?
+		    <a href='<?php echo site_url('/pictoria/logout/') ?>'> Log out.</a>
+		  </div>
+		</div>
+			
 		<form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>		
 		<button type="button" class="btn btn-success" id="submit-all">Submit all files</button>
 		<button type="button" class="btn btn-warning" onclick="reload()">Refresh page</button><br><br>

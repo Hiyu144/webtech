@@ -10,9 +10,13 @@
 	</head>
 	<body>
 		<div class="container">
-						<div class="jumbotron">	            
-							<center><h1>Kéo thả vào ô ở dưới coi</h1></center>
-			            </div>
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">Such stranger. Much alien.</h3>
+						  </div>
+						  <div class="panel-body"> Wow.						    
+						  </div>
+						</div>
 			        </div>
 					<div class="container">
 			        <form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>
