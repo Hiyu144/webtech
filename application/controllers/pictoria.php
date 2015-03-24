@@ -3,11 +3,13 @@
 class Pictoria extends CI_Controller {
 	
 	public function index() {
+		session_start();
 		$this->load->view('header');
 		$this->load->view('homepage');
 	}
 	
 	public function signup(){
+		session_start();
 		$this->load->view('header');
 		$name = $_POST['name'];
 		$uname = $_POST['uname'];
@@ -43,38 +45,42 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function join(){
+		session_start();
 		$this->load->view('header');
 		$this->load->view('join');
 	}
 	
 	public function login() {
+		session_start();
+		$this->load->view('header');
 		$unameLog = $_POST['unameLog'];
 		$passLog = $_POST['passLog'];
 		$query = $this->db->get_where('form', array('Username' => $unameLog), 1);
 		$user = $query->row_array();
 		if ($query->num_rows()!=0) {
 			if ($user['Password']==$passLog){
-				session_start();
 				$_SESSION['username'] = $user['Username'];
-				echo "Login successfully...<html>To continue,<a href='" . site_url('/pictoria/member/') . "/" . $user['Username'] . "'>click here</a></html>";
+				$data = array('mess' => "Login successfully...<html>To continue,<a href='" . site_url('/pictoria/member/') . "'>click here</a></html>");
+				$this->load->view('login', $data);
 			}else{
-				echo "Wrong Password</br>";
-				echo "<a href='" . site_url('/pictoria/join/') . "'>Try again</a>";
+				$data = array('mess' => "Wrong Password</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");
+				$this->load->view('login', $data);
 			}
 		}else{
-			echo "Username not exsist</br>";
-			echo "<a href='" . site_url('/pictoria/join/') . "'>Try again</a>";
+			$data = array('mess' => "Username not exsist</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");
+			$this->load->view('login', $data);
 		}
 	}
 	
 	public function member(){
 		session_start();
+		$this->load->view('header');
 		$this->load->view('memupload');
 	}
 	
 	public function up() {
-		$this->load->view('header');
 		session_start();
+		$this->load->view('header');
 		if (isset($_SESSION['username'])){
 			$this->load->view('memupload');
 		}else{
@@ -83,8 +89,31 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function album() {
+		session_start();
+		$pathAlbum = getcwd() . '/uploads/' . $_SESSION['username'];
+		$dump = directory_map($pathAlbum);
+		$data = array('data' => $dump);
 		$this->load->view('header');
-		$this->load->view('album');
+		$this->load->view('album', $data);
+	}
+	
+	public function memdelete() {
+		session_start();
+		$remove = $_POST ['remove'];
+		foreach($remove as $item) {
+			$item = chop($item,"/");
+			$pathDel = getcwd() . '/uploads/' . $_SESSION['username'] . "/" . $item;
+			if (!unlink($pathDel)) {
+				$data = array('mess' => "Error deleting images</br>");
+				$this->load->view('header');
+				$this->load->view('memdelete', $data);
+			}else{
+				$this->db->delete('images', array('linkimg' => $item));
+				$data = array('mess' => "Images were deleted</br>");
+				$this->load->view('header');
+				$this->load->view('memdelete', $data);
+			}	
+		}
 	}
 	
 	public function logout(){
@@ -95,29 +124,27 @@ class Pictoria extends CI_Controller {
 	
 	public function upload() {
 		session_start();
-		if (isset($_SESSION['username'])){
-			if (!empty($_FILES)) {
-				$dump = $_FILES['file']['name'];
-				$tempFile = $_FILES['file']['tmp_name'];
-				$ext = pathinfo($dump, PATHINFO_EXTENSION);
-				$imgPage = uniqid();
-				$fileName = $imgPage. '.' .$ext;
-				$targetPath = getcwd() . '/uploads/' . $_SESSION['username'] . "/";
-				$targetFile = $targetPath . $fileName;
-				move_uploaded_file($tempFile, $targetFile);
-			}
-		}else{
-			if (!empty($_FILES)) {
-				$dump = $_FILES['file']['name'];
-				$tempFile = $_FILES['file']['tmp_name'];
-				$ext = pathinfo($dump, PATHINFO_EXTENSION);
-				$imgPage = uniqid();
-				$fileName = $imgPage. '.' .$ext;
+		if (!empty($_FILES)) {
+			$dump = $_FILES['file']['name'];
+			$tempFile = $_FILES['file']['tmp_name'];
+			$ext = pathinfo($dump, PATHINFO_EXTENSION);
+			$imgPage = uniqid();
+			$fileName = $imgPage. '.' .$ext;
+			if (isset($_SESSION['username'])){
+				$targetPath = 'uploads/' . $_SESSION['username'] . "/";
+				$key = 0;
+			}else{
+				$targetPath = 'uploads/anon/';
 				$key = uniqid();
-				$targetPath = getcwd() . '/uploads/anon/';
-				$targetFile = $targetPath . $fileName ;
-				move_uploaded_file($tempFile, $targetFile);
-				$this->db->insert('images', array('linkimg' => $fileName, 'keyimg' => $key, 'imgpage' => $imgPage, 'visit' => 0));
+			}
+			$targetFile = getcwd() . "/" . $targetPath . $fileName;
+			move_uploaded_file($tempFile, $targetFile);
+			$this->db->insert('images', array('linkimg' => $fileName,
+											  'pathimg' => $targetPath,
+											  'keyimg' => $key, 
+											  'imgpage' => $imgPage, 
+											  'visit' => 0));
+			if (!isset($_SESSION['username'])){
 				$response = $fileName . '@' . $key . '-' . $imgPage;
 				echo $response;
 			}
@@ -125,21 +152,31 @@ class Pictoria extends CI_Controller {
     }
 	
 	public function anon_view($response) {
+		session_start();
+		$this->load->view('header');
 		$this->load->view("anon_view");
 	}
 	
 	public function delete($link){ 
+		session_start();
+		$this->load->view('header');	
 		$linkArr = explode("-", $link);
-		$query = $this->viewFunc($linkArr[1]);
-		$img = $query->row_array();
-		if (($query->num_rows() != 0) && ($img['keyimg'] == $linkArr[0])) {
-			$this->load->view("delete");
-		}else{
+		if (count($linkArr) < 2){
 			$this->load->view("not_found");
+		}else{
+			$query = $this->viewFunc($linkArr[1]);
+			$img = $query->row_array();
+			if (($query->num_rows() != 0) && ($img['pathimg']=='uploads/anon/') && ($img['keyimg'] == $linkArr[0])) {
+				$this->load->view("delete");
+			}else{
+				$this->load->view("not_found");
+			}
 		}
 	}
 	
 	public function delete_done($link){
+		session_start();
+		$this->load->view('header');
 		$linkArr = explode("-", $link);
 		$query = $this->viewFunc($linkArr[1]);
 		$img = $query->row_array();
@@ -150,6 +187,8 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function view($page){
+		session_start();
+		$this->load->view('header');
 		$query = $this->viewFunc($page);
 		$img = $query->row_array();
 		if ($query->num_rows() != 0){

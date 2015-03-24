@@ -1,28 +1,22 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/index/') ?>'">Home</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/up/') ?>'">Upload</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
-	</head>
-	<?php session_start(); ?>
+	<div class="container">
 	<div>
-		<img src="<?php echo '../../../uploads/anon/' . $linkimg; ?> " />
+		<img src="<?php echo base_url() . $pathimg . $linkimg; ?> " />
 	</div>
 	<div>
 		<p>Direct Link</p>
-		<input onClick="this.select();" type="text" value="<?php echo 'http://localhost/ci/uploads/anon/' . $linkimg; ?>" />
+		<input onClick="this.select();" type="text" value="<?php echo base_url() . $pathimg . $linkimg; ?>" />
 	</div>	
 	<div>
 		<p>Page Link</p>
 		<input onClick="this.select();" type="text" value="<?php echo site_url('/pictoria/view/') . "/" . $imgpage; ?>" />
 	</div>
 	<div>
-		<p>Views: <?php echo $visit; ?></p>
-	</div>
 	<?php if (isset($_SESSION['username'])){
-		echo $_SESSION['username'];
-		echo "<button onclick='location.href=\"" . site_url('/pictoria/cool/') . "\"'>Cool!</button>" . "</br>";
-		echo "<a href='" . site_url('/pictoria/logout/') . "'>Log out</a>";
+		echo "<button onclick='location.href=\"" . site_url('/pictoria/cool/') . "\"'>Cool!</button>";
 	} ?>
+	Views: <?php echo $visit; ?>
+	Cool: <?php echo $cool; ?>
+	</div>
 </html>

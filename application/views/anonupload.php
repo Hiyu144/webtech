@@ -10,8 +10,9 @@
 	</head>
 	<body>
 		<div class="container">
-						<div class="jumbotron">	            
-							<center><h1>Kéo thả vào ô ở dưới coi</h1></center>
+						<div class="jumbotron">	
+							<center><h1>Chào người lạ</h1></center>
+							<center><h2>Kéo thả vào ô ở dưới coi</h2></center>
 			            </div>
 			        </div>
 					<div class="container">

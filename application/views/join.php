@@ -15,7 +15,7 @@
 					<td>Name</td> <td><input class="round" type="text" name="name" maxlength="255" required /></td></tr>
 						<tr><td>Username</td> <td><input class="round" type="text" name="uname" maxlength="50" required /></td></tr>
 						<tr><td>Password</td> <td><input class="round" type="password" name="password" id="pass1" required /></td></tr>
-						<tr><td>Verify Password</td> <td><input class="round" type="password" name="passwordConfirm" id="pass2" onkeyup="matchCheck(); return false;" />
+						<tr><td>Verify Password</td> <td><input class="round" type="password" name="passwordConfirm" id="pass2" onkeyup="matchCheck(); submitable(); return false;" />
 								<span id="confirmMessage" ></span></td></tr>
 						<tr><td>Email</td> <td><input class="round" type="text" name="mail" id="email" onkeyup="mailCheck(); submitable(); return false;" required />
 								<span id="confirmMail" ></span></td></tr>
@@ -50,51 +50,51 @@
 			</table>
 	</div>
 		<script type="text/javascript">
-		function matchCheck() {
-			var pass1 = document.getElementById('pass1');
-			var pass2 = document.getElementById('pass2');
-			//Set the colors
-			var message = document.getElementById('confirmMessage');
-			var goodColor = "#088A08";
-			var badColor = "#8A0808";
-			//Compare the values in the password field
-			//and the confirmation field
-			if (pass1.value == pass2.value){
-				pass2.style.borderColor = goodColor;
-				message.innerHTML = "Passwords Match!";
-				return true;
-			}else{
-				pass2.style.borderColor = badColor;
-				message.innerHTML = "Passwords Mismatch!";
-				return false;
+			function matchCheck() {
+				var pass1 = document.getElementById('pass1');
+				var pass2 = document.getElementById('pass2');
+				//Set the colors
+				var message = document.getElementById('confirmMessage');
+				var goodColor = "#088A08";
+				var badColor = "#8A0808";
+				//Compare the values in the password field
+				//and the confirmation field
+				if (pass1.value == pass2.value){
+					pass2.style.borderColor = goodColor;
+					message.innerHTML = "Passwords Match!";
+					return true;
+				}else{
+					pass2.style.borderColor = badColor;
+					message.innerHTML = "Passwords Mismatch!";
+					return false;
+				}
+			};
+			
+			function mailCheck() {
+				var mail = document.getElementById('email');
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				var message = document.getElementById('confirmMail');
+				var goodColor = "#088A08";
+				var badColor = "#8A0808";
+				if (mail.value.match(mailformat)){
+					mail.style.borderColor = goodColor;
+					message.innerHTML = "Good Email Format!";
+					return true;
+				}else{
+					mail.style.borderColor = badColor;
+					message.innerHTML = "Bad Email Format!";
+					return false;
+				}
+			};
+			
+			function submitable(){
+				if (matchCheck() && mailCheck()){
+					document.getElementById('signup').disabled = false;
+				}else{
+					document.getElementById('signup').disabled = true;
+				}
 			}
-		};
-		
-		function mailCheck() {
-			var mail = document.getElementById('email');
-			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			var message = document.getElementById('confirmMail');
-			var goodColor = "#088A08";
-			var badColor = "#8A0808";
-			if (mail.value.match(mailformat)){
-				mail.style.borderColor = goodColor;
-				message.innerHTML = "Good Email Format!";
-				return true;
-			}else{
-				mail.style.borderColor = badColor;
-				message.innerHTML = "Bad Email Format!";
-				return false;
-			}
-		};
-		
-		function submitable(){
-			if (matchCheck() && mailCheck()){
-				document.getElementById('signup').disabled = false;
-			}else{
-				document.getElementById('signup').disabled = true;
-			}
-		}
-	</script>
+		</script>
 	</div>
 </body>
 </html>	
