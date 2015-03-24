@@ -184,15 +184,19 @@ class Pictoria extends CI_Controller {
 		$this->db->order_by('visit', 'desc');
 		$query = $this->db->get();
 		$rows = $query->num_rows();
-		$i = 0;
-		$arrLink = [];
-		$arrPage = [];
-		foreach ($query->result() as $row){
-			$arrLink[$i] = $row->pathimg . $row->linkimg;
-			$arrPage[$i] = $row->imgpage;
-			$i = $i + 1;
+		if ($rows == 0){
+			$data = array('mess' => "Sadly, we got nothing!! Halp!!");
+		}else{
+			$i = 0;
+			$arrLink = [];
+			$arrPage = [];
+			foreach ($query->result() as $row){
+				$arrLink[$i] = $row->pathimg . $row->linkimg;
+				$arrPage[$i] = $row->imgpage;
+				$i = $i + 1;
+			}
+			$data = array('arrLink' => $arrLink, 'arrPage' => $arrPage, 'rows' => $rows);
 		}
-		$data = array('arrLink' => $arrLink, 'arrPage' => $arrPage, 'rows' => $rows);
 		$this->load->view('hotpic', $data);
 	}
 		
