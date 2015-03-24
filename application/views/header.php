@@ -28,6 +28,9 @@
 						<li><a href="http://localhost/ci/index.php/pictoria/up">Upload</a></li>
 						<li><a href="http://localhost/ci/index.php/pictoria/join">Signup/Login</a></li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Hello <?php if (isset($_SESSION)) {echo $_SESSION['username'];} else {echo 'random stranger';}?></a></li>
+					</ul>
 					<!-- <form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Search">
@@ -35,7 +38,7 @@
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
+						<li><a href="#"></a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 							<ul class="dropdown-menu">

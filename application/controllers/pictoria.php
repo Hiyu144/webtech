@@ -56,19 +56,20 @@ class Pictoria extends CI_Controller {
 			if ($user['Password']==$passLog){
 				session_start();
 				$_SESSION['username'] = $user['Username'];
-				echo "Login successfully...<html>To continue,<a href='" . site_url('/pictoria/member/') . "/" . $user['Username'] . "'>click here</a></html>";
+				echo "Login successfully...<html>To continue, <a href='" . site_url('/pictoria/member/') . "/" . $user['Username'] . "'>click here</a></html>";
 			}else{
 				echo "Wrong Password</br>";
 				echo "<a href='" . site_url('/pictoria/join/') . "'>Try again</a>";
 			}
 		}else{
-			echo "Username not exsist</br>";
+			echo "Username does not exist</br>";
 			echo "<a href='" . site_url('/pictoria/join/') . "'>Try again</a>";
 		}
 	}
 	
 	public function member(){
 		session_start();
+		$this->load->view('header');
 		$this->load->view('memupload');
 	}
 	
@@ -125,10 +126,12 @@ class Pictoria extends CI_Controller {
     }
 	
 	public function anon_view($response) {
+		$this->load->view('header');
 		$this->load->view("anon_view");
 	}
 	
 	public function delete($link){ 
+		$this->load->view('header');
 		$linkArr = explode("-", $link);
 		$query = $this->viewFunc($linkArr[1]);
 		$img = $query->row_array();
@@ -140,6 +143,7 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function delete_done($link){
+		$this->load->view('header');
 		$linkArr = explode("-", $link);
 		$query = $this->viewFunc($linkArr[1]);
 		$img = $query->row_array();
@@ -150,6 +154,7 @@ class Pictoria extends CI_Controller {
 	}
 	
 	public function view($page){
+		$this->load->view('header');
 		$query = $this->viewFunc($page);
 		$img = $query->row_array();
 		if ($query->num_rows() != 0){
@@ -158,6 +163,7 @@ class Pictoria extends CI_Controller {
 			$this->db->update('images', array('visit' => $visitor));
 			$this->load->view('view', $img);
 		}else{
+
 			$this->load->view("not_found");
 		}
 	}

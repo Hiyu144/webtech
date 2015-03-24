@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/index/') ?>'">Home</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/up/') ?>'">Upload</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
+		<link href="<?php echo base_url('resources/css/bootstrap.min.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('resources/css/font-awesome.min.css') ?>" rel="stylesheet">
+		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
+		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
-	<h1>Image has been deleted!!</h1>
+	<div class="alert alert-success" role="alert">Image has been deleted huehuehue.</div>
 	<a href = "<?php echo site_url('/pictoria/index/') ?>">Back to home page</a>
 <html>

@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/index/') ?>'">Home</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/up/') ?>'">Upload</button>
-		<button onclick="window.location.href='<?php echo site_url('/pictoria/join/') ?>'">Signup/Login</button>
+		<link href="<?php echo base_url('resources/css/bootstrap.min.css') ?>" rel="stylesheet">
+		<link href="<?php echo base_url('resources/css/font-awesome.min.css') ?>" rel="stylesheet">
+		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
+		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
 	<?php session_start(); ?>
 	<div>
