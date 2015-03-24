@@ -16,11 +16,11 @@
 	<div class="signup">
 		<legend>Create new account</legend>
 			<table><tr>				
-				<form action="<?php echo site_url('/pictoria/signup'); ?>" onsubmit="submitable()" method="POST">
+				<form action="<?php echo site_url('/pictoria/signup'); ?>" onsubmit="return submitable()" method="POST">
 					<td>Name</td> <td><input class="form-control" type="text" name="name" maxlength="255" required /></td></tr>
 						<tr><td>Username</td> <td><input class="form-control input-" type="text" name="uname" maxlength="50" required /></td></tr>
 						<tr><td>Password</td> <td><input class="form-control" type="password" name="password" id="pass1" required /></td></tr>
-						<tr><td>Verify Password</td> <td><input class="form-control" type="password" name="passwordConfirm" id="pass2" onkeyup="matchCheck(); return false;" />
+						<tr><td>Verify Password</td> <td><input class="form-control" type="password" name="passwordConfirm" id="pass2" onkeyup="matchCheck(); submitable(); return false;" required/>
 								<span id="confirmMessage" ></span></td></tr>
 						<tr><td>Email</td> <td><input class="form-control" type="text" name="mail" id="email" onkeyup="mailCheck(); submitable(); return false;" required />
 								<span id="confirmMail" ></span></td></tr>
@@ -102,8 +102,10 @@
 		function submitable(){
 			if (matchCheck() && mailCheck()){
 				document.getElementById('signup').disabled = false;
+				return true;
 			}else{
 				document.getElementById('signup').disabled = true;
+				return false;
 			}
 		}
 	</script>

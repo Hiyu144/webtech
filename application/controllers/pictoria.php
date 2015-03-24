@@ -6,6 +6,25 @@ class Pictoria extends CI_Controller {
 		session_start();
 		$this->load->view('header');
 		$this->load->view('homepage');
+		$this->hotpic();
+	}
+	
+	public function hotpic() {
+		$this->db->select()->from('images');
+		$this->db->order_by('visit', 'desc');
+		$query = $this->db->get();
+		$i = 0;
+		$arrLink = [];
+		$arrPage = [];
+		foreach ($query->result() as $row){
+			$arrLink['$i'] = $row->pathimg . $row->linkimg;
+			$arrPage['$i'] = $row->imgpage;
+			$i = $i + 1;
+			echo $arrLink['$i'];
+			echo $arrPage['$i'];
+		}
+		$data = array('arrLink' => $arrLink, 'arrPage' => $arrPage);
+		$this->load->view('hotpic', $data);
 	}
 	
 	public function signup(){
@@ -105,15 +124,13 @@ class Pictoria extends CI_Controller {
 			$pathDel = getcwd() . '/uploads/' . $_SESSION['username'] . "/" . $item;
 			if (!unlink($pathDel)) {
 				$data = array('mess' => "Error deleting images</br>");
-				$this->load->view('header');
-				$this->load->view('memdelete', $data);
 			}else{
 				$this->db->delete('images', array('linkimg' => $item));
 				$data = array('mess' => "Images were deleted</br>");
-				$this->load->view('header');
-				$this->load->view('memdelete', $data);
 			}	
 		}
+		$this->load->view('header');
+		$this->load->view('memdelete', $data);
 	}
 	
 	public function logout(){

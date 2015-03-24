@@ -6,7 +6,7 @@
 		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
 		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
-	<?php session_start(); ?>
+	<div class="container">
 	<div>
 		<img src="<?php echo base_url() . $pathimg . $linkimg; ?> " />
 	</div>
