@@ -9,24 +9,6 @@ class Pictoria extends CI_Controller {
 		$this->hotpic();
 	}
 	
-	public function hotpic() {
-		$this->db->select()->from('images');
-		$this->db->order_by('visit', 'desc');
-		$query = $this->db->get();
-		$i = 0;
-		$arrLink = [];
-		$arrPage = [];
-		foreach ($query->result() as $row){
-			$arrLink['$i'] = $row->pathimg . $row->linkimg;
-			$arrPage['$i'] = $row->imgpage;
-			$i = $i + 1;
-			echo $arrLink['$i'];
-			echo $arrPage['$i'];
-		}
-		$data = array('arrLink' => $arrLink, 'arrPage' => $arrPage);
-		$this->load->view('hotpic', $data);
-	}
-	
 	public function signup(){
 		session_start();
 		$this->load->view('header');
@@ -162,17 +144,11 @@ class Pictoria extends CI_Controller {
 											  'imgpage' => $imgPage, 
 											  'visit' => 0));
 			if (!isset($_SESSION['username'])){
-				$response = $fileName . '@' . $key . '-' . $imgPage;
+				$response = $imgPage;
 				echo $response;
 			}
 		}
     }
-	
-	public function anon_view($response) {
-		session_start();
-		$this->load->view('header');
-		$this->load->view("anon_view");
-	}
 	
 	public function delete($link){ 
 		session_start();
@@ -201,6 +177,39 @@ class Pictoria extends CI_Controller {
 		unlink($path);
 		$this->db->delete('images', array('ID' => $img['ID']));
 		$this->load->view("delete_done");
+	}
+	
+	public function hotpic() {
+		$this->db->select()->from('images');
+		$this->db->order_by('visit', 'desc');
+		$query = $this->db->get();
+		$rows = $query->num_rows();
+		$i = 0;
+		$arrLink = [];
+		$arrPage = [];
+		foreach ($query->result() as $row){
+			$arrLink[$i] = $row->pathimg . $row->linkimg;
+			$arrPage[$i] = $row->imgpage;
+			$i = $i + 1;
+		}
+		$data = array('arrLink' => $arrLink, 'arrPage' => $arrPage, 'rows' => $rows);
+		$this->load->view('hotpic', $data);
+	}
+		
+	public function anon_view($response) {
+		session_start();
+		$pageIma = explode('&',$response);
+		$numb = count($pageIma) - 1;
+		$linkar = [];
+		for ($i=0; $i < $numb; $i++){
+			$que = $this->viewFunc($pageIma[$i]);
+			$imgr = $que->row_array();
+			$linkar[$i] = $imgr['pathimg'] . $imgr['linkimg'];
+			$keyar[$i] = $imgr['keyimg'];
+		}
+		$data = array('pageIma' => $pageIma, 'linkar' => $linkar, 'keyar' => $keyar , 'numb' => $numb);
+		$this->load->view('header');
+		$this->load->view("anon_view", $data);
 	}
 	
 	public function view($page){
