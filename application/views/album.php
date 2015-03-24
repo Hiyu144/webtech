@@ -24,12 +24,9 @@
 							  <div class="col-sm-6 col-md-4">
 								<div class="thumbnail">
 									<a href="' . site_url('/pictoria/view/') . "/" . $imag[0] . '">
-								  <img src="' . base_url() . '/uploads/' . $_SESSION['username'] . "/" . $image . '" />
-								  
+								    <img src="' . base_url() . '/uploads/' . $_SESSION['username'] . "/" . $image . '" />
 									</a>
 									<input type="checkbox" id="check[' . $i . ']" name="remove[' . $i . ']" value=' . $image . '/>
-									
-								  
 								</div>
 							  </div>
 							';
