@@ -10,15 +10,18 @@
 	</head>
 	<body>
 		<div class="container">
-						<div class="jumbotron">	
-							<center><h1>Chào người lạ</h1></center>
-							<center><h2>Kéo thả vào ô ở dưới coi</h2></center>
-			            </div>
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						    <h3 class="panel-title">Such stranger. Much alien.</h3>
+						  </div>
+						  <div class="panel-body"> Wow.	Kéo thả vào ô ở dưới coi.					    
+						  </div>
+						</div>
 			        </div>
 					<div class="container">
 			        <form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>
-					<button id="submit-all">Submit all files</button>
-					<button onclick="reload()">Refresh page</button><br><br>
+					<button type="button" class="btn btn-success" id="submit-all">Submit all files</button>
+					<button type="button" class="btn btn-warning" onclick="reload()">Refresh page</button><br><br>
 					<script>
 						Dropzone.options.myDropzone = {                        
 							addRemoveLinks: true,

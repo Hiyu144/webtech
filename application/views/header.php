@@ -36,7 +36,7 @@
 							echo '<ul class="nav navbar-nav navbar-right">
 								<li><a href="#">' . $_SESSION['username'] . '</a></li>
 								<li class="dropdown">
-									<a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Stuff to do<b class="caret"></b></a>
+									<a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Stuff to do <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 										<li><a href="' . site_url('/pictoria/album/') . '">Album</a></li>
 										<li><a href="' . site_url('/pictoria/favorite/') . '">Favorite</a></li>

@@ -60,7 +60,7 @@ class Pictoria extends CI_Controller {
 		if ($query->num_rows()!=0) {
 			if ($user['Password']==$passLog){
 				$_SESSION['username'] = $user['Username'];
-				$data = array('mess' => "Login successfully...<html>To continue,<a href='" . site_url('/pictoria/member/') . "'>click here</a></html>");
+				$data = array('mess' => "Login successfully...<html> To continue, <a href='" . site_url('/pictoria/member/') . "'>click here</a></html>");
 				$this->load->view('login', $data);
 			}else{
 				$data = array('mess' => "Wrong Password</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");

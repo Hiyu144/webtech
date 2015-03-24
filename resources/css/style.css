@@ -1,9 +1,10 @@
 .divider {
     border-left:1px solid #38546d; 
-    height:50%;
+    height:80%;
+
     position:absolute;
     right:51.5%;
-    top:3%;
+    top:11.5%;
 }
 
 .signup {
