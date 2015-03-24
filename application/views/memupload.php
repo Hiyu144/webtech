@@ -8,11 +8,11 @@
 		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
 	<body>
-		<p>Welcome, <?php echo $_SESSION['username'];?>    
-		   <a href='<?php echo site_url('/pictoria/logout/') ?>'>Log out</a></p>
-		<form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>
-		<button id="submit-all">Submit all files</button>
-		<button onclick="reload()">Refresh page</button><br><br>
+		<div class="container"><p>Welcome, <?php echo $_SESSION['username'];?>.    
+		   <a href='<?php echo site_url('/pictoria/logout/') ?>'> Log out</a></p>
+		<form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>		
+		<button type="button" class="btn btn-success" id="submit-all">Submit all files</button>
+		<button type="button" class="btn btn-warning" onclick="reload()">Refresh page</button><br><br>
 		<script>
 			Dropzone.options.myDropzone = {                        
 				addRemoveLinks: true,
@@ -39,5 +39,6 @@
 				window.location.reload();
 			};
 		</script>
+		</div>
 	</body>
 </html>
