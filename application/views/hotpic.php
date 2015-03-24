@@ -9,14 +9,18 @@
 	<body>
 		<div class = "container">
 		<?php
-			for ($i = 0; $i < $rows; $i++){
-				echo '<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<a href="' . site_url('/pictoria/view/') . "/" . $arrPage[$i] . '">
-						    <img src="' . base_url() . '/' . $arrLink[$i] . '" />
-							</a>
-						</div>
-					</div>';
+			if (isset($mess)){
+				echo '<h1>' . $mess . '</h1>';
+			}else{
+				for ($i = 0; $i < $rows; $i++){
+					echo '<div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+								<a href="' . site_url('/pictoria/view/') . "/" . $arrPage[$i] . '">
+								<img src="' . base_url() . '/' . $arrLink[$i] . '" />
+								</a>
+							</div>
+						</div>';
+				}
 			}
 		?>
 	</body>
