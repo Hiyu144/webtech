@@ -1,13 +1,17 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
+	<head>		
 		<link href="<?php echo base_url('resources/css/bootstrap.min.css') ?>" rel="stylesheet">
 		<link href="<?php echo base_url('resources/css/font-awesome.min.css') ?>" rel="stylesheet">
 		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
 		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
-	<body>		
-		<div class="container"><div class="alert alert-danger" role="alert">Image not found huehuehue</div>
-		<a class="btn" href="<?php echo site_url('/pictoria/index/'); ?>"><button type="button" class="btn btn-info">Back to home page</button></a>
+	<body>
+		<?php
+			for ($i = 0; $i < 7; $i++){
+				echo $arrLink['$i'];
+				echo $arrPage['$i'];
+			}
+		?>
 	</body>
 </html>
