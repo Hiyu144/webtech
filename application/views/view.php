@@ -6,8 +6,8 @@
 		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
 		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	</head>
-	<?php session_start(); ?>
-	<div>
+	<div class="container">
+	<div class="thumbnail">
 		<img src="<?php echo base_url() . $pathimg . $linkimg; ?> " />
 	</div>
 	<div>
@@ -21,5 +21,5 @@
 		echo "<button onclick='location.href=\"" . site_url('/pictoria/cool/') . "\"'>Cool!</button>";
 	} ?>
 	Views: <?php echo $visit; ?>, Cool: <?php echo $cool; ?>
-	</div>
+	</div></div>
 </html>
