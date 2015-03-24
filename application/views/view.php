@@ -11,15 +11,13 @@
 		<img src="<?php echo '../../../uploads/anon/' . $linkimg; ?> " />
 	</div>
 	<div>
-		<p>Direct Link</p>
-		<input onClick="this.select();" type="text" value="<?php echo 'http://localhost/ci/uploads/anon/' . $linkimg; ?>" />
-	</div>	
-	<div>
-		<p>Page Link</p>
-		<input onClick="this.select();" type="text" value="<?php echo site_url('/pictoria/view/') . "/" . $imgpage; ?>" />
+		<h3>Direct Link</h3>		
+		<input class = "form-control" onClick="this.select();" type="text" value="<?php echo 'http://localhost/ci/uploads/anon/' . $linkimg; ?>" />
+		<h3>Page Link</h3>
+		<input class = "form-control"  onClick="this.select();" type="text" value="<?php echo site_url('/pictoria/view/') . "/" . $imgpage; ?>" />
 	</div>
 	<div>
-		<p>Views: <?php echo $visit; ?></p>
+		<h3>Views: <?php echo $visit; ?></h3>
 	</div>
 	<?php if (isset($_SESSION['username'])){
 		echo $_SESSION['username'];
