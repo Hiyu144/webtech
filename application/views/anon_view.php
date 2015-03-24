@@ -40,13 +40,14 @@
   			      <div class="caption">
   			        <h3>Quantumized lv. ';
   			        echo $i+1;
-  			        echo '</h3>
-  			        <p>You could get your direct link or delete your file</p>
-  			        <p><a href="' . site_url('/pictoria/delete') . "/" . $arr[1] . '"><button type="button" class="btn btn-danger">Delete</button></a></p>';
+  			        echo '</h3>';
   			        echo '<h3>Direct Link</h3>';
 		echo '<div><input class = "form-control" onClick="this.select();" type="text" value="http://localhost/ci/uploads/anon/' . $arr[0]. '" /></div>';
 		echo '<h3>Page Link</h3>';
-		echo '<div><input class = "form-control" onClick="this.select();" type="text" value="' . site_url('/pictoria/view') . "/" . $page[0] . '"/></div>';	
+		echo '<div><input class = "form-control" onClick="this.select();" type="text" value="' . site_url('/pictoria/view') . "/" . $page[0] . '"/></div>';
+		echo '<h3>Delete Link</h3>
+			  <h4>(Appear here only)</h4>';
+		echo '<div><input class = "form-control" onClick="this.select();" type="text" value="' . site_url('/pictoria/delete') . "/" . $arr[1] . '" /></div>';
   			      echo '</div>
   			    </div>
   			  </div>

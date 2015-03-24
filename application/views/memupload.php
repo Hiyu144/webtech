@@ -16,7 +16,7 @@
 		  </div>
 		  <div class="panel-body"> Where do we go? <h2>Kéo thả vào ô ở dưới nhoé</h2>
 		  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-		  <img src="<?php echo base_url('resources/ci.png') ?>">
+		  <img width="30" height="30" src="<?php echo base_url('resources/ci.png') ?>">
 		  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
 		    
 		  </div>
