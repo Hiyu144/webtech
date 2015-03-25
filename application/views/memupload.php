@@ -25,7 +25,7 @@
 			
 		<form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>		
 		<button type="button" class="btn btn-success" id="submit-all">Submit all files</button>
-		<button type="button" class="btn btn-warning" onclick="reload()">Refresh page</button><br><br>
+		<button type="button" class="btn btn-warning" onclick="reload()">Back to homepage</button><br><br>
 		<script>
 			Dropzone.options.myDropzone = {                        
 				addRemoveLinks: true,
@@ -49,7 +49,7 @@
 			};
 			
 			function reload() {
-				window.location.reload();
+				window.location.href = "<?php echo site_url('/pictoria/index/') ?>";
 			};
 		</script>
 		</div>

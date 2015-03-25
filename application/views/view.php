@@ -8,18 +8,27 @@
 	</head>
 	<div class="container">
 	<div class="thumbnail">
-		<img src="<?php echo base_url() . $pathimg . $linkimg; ?> " />
+		<img src="<?php echo base_url() . $img['pathimg'] . $img['linkimg']; ?> " />
 	</div>
 	<div>
 		<h3>Direct Link</h3>		
-		<input class = "form-control" onClick="this.select();" type="text" value="<?php echo base_url() . $pathimg . $linkimg; ?>" />
+		<input class = "form-control" onClick="this.select();" type="text" value="<?php echo base_url() . $img['pathimg'] . $img['linkimg']; ?>" />
 		<h3>Page Link</h3>
-		<input class = "form-control" onClick="this.select();" type="text" value="<?php echo site_url('/pictoria/view/') . "/" . $imgpage; ?>" />
+		<input class = "form-control" onClick="this.select();" type="text" value="<?php echo site_url('/pictoria/view/') . "/" . $img['imgpage']; ?>" />
 	</div>
-	
 	<?php if (isset($_SESSION['username'])){
-		echo "<button onclick='location.href=\"" . site_url('/pictoria/cool/') . "\"'>Cool!</button>";
+		$cooler = site_url('/pictoria/cool/') . "/" . $img['ID'];
+		if ($_SESSION['username'] == $img['owner']){
+			echo '<h3>Share mode</h3>';
+			echo '<div><form action="' . site_url('/pictoria/modeuser/') . '" method="POST">';
+			echo '<div class="radio"><label><input type="radio" name="mode[]" value="0-' . $img['imgpage'] . '" checked>Public</label></div>';
+			echo '<div class="radio"><label><input type="radio" name="mode[]" value="1-' . $img['imgpage'] . '">Private</label></div>';
+  			echo '<input class="btn btn-warning" type="submit" value="Submit configiration" name = "modes"/></div></form>';
+		}
+	}else{
+		$cooler = site_url('/pictoria/join/');
 	} ?>
-	Views: <?php echo $visit; ?>, Cool: <?php echo $cool; ?>
-	</div></div>
+	<div style="margin-top:10px"><button class="btn btn-success" onclick="location.href='<?php echo $cooler; ?>'">Cool!</button>
+	Views: <?php echo $img['visit']; ?> Cool: <?php echo $upvote; ?>
+	</div></div></div>
 </html>

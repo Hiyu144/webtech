@@ -7,7 +7,6 @@
 		<script src="<?php echo base_url('resources/js/jquery.min.js') ?>"></script>
 		<script src="<?php echo base_url('resources/js/bootstrap.min.js') ?>"></script>
 	<title>Let's Play</title>
-	
 </head>
 <body>
 	
@@ -26,13 +25,13 @@
 								<span id="confirmMail" ></span></td></tr>
 						<tr><td>Gender</td><td>
 							<div class="radio">
-							      <label><input type="radio" name="gender" value="Male">Male</label>
+							      <label><input type="radio" name="gender" value="Male" checked>Male</label>
 							    </div>
 							    <div class="radio">
-							      <label><input type="radio" name="gender">Female</label>
+							      <label><input type="radio" name="gender" value="Female">Female</label>
 							    </div>
 							    <div class="radio">
-							      <label><input type="radio" name="gender">Unidentified item</label>
+							      <label><input type="radio" name="gender" value="Unidentified">Unidentified item</label>
 							    </div>
 							</td></tr>
 						<tr><td>Birthday</td> <td><input class="form-control" type="date" name="bday" required /></td></tr>
