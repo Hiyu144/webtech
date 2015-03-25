@@ -61,15 +61,19 @@ class Pictoria extends CI_Controller {
 		if ($query->num_rows()!=0) {
 			if ($user['Password']==$passLog){
 				$_SESSION['username'] = $user['Username'];
-				$data = array('mess' => "Login successfully...<html> To continue, <a href='" . site_url('/pictoria/member/') . "'>click here</a></html>");
-				$this->load->view('login', $data);
+				$_SESSION['ID'] = $user['ID'];
+				redirect('/pictoria/member/');
 			}else{
-				$data = array('mess' => "Wrong Password</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");
-				$this->load->view('login', $data);
+				echo '<script>alert("Wrong password!! Please try again");</script>';
+				redirect('/pictoria/join/', 'refresh');
+				// $data = array('mess' => "Wrong Password</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");
+				// $this->load->view('login', $data);
 			}
 		}else{
-			$data = array('mess' => "Username not exsist</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");
-			$this->load->view('login', $data);
+			echo '<script>alert("Username not exsist!! Please try again");</script>';
+			redirect('/pictoria/join/', 'refresh');
+			// $data = array('mess' => "Username not exsist</br><a href='" . site_url('/pictoria/join/') . "'>Try again</a>");
+			// $this->load->view('login', $data);
 		}
 	}
 	
@@ -118,7 +122,7 @@ class Pictoria extends CI_Controller {
 	public function logout(){
 		session_start();
 		session_destroy();
-		$this->index();
+		redirect('/pictoria/index/');
 	}
 	
 	public function upload() {
@@ -131,9 +135,11 @@ class Pictoria extends CI_Controller {
 			$fileName = $imgPage. '.' .$ext;
 			if (isset($_SESSION['username'])){
 				$targetPath = 'uploads/' . $_SESSION['username'] . "/";
+				$owner = $_SESSION['username'];
 				$key = 0;
 			}else{
 				$targetPath = 'uploads/anon/';
+				$owner = 0;
 				$key = uniqid();
 			}
 			$targetFile = getcwd() . "/" . $targetPath . $fileName;
@@ -142,7 +148,9 @@ class Pictoria extends CI_Controller {
 											  'pathimg' => $targetPath,
 											  'keyimg' => $key, 
 											  'imgpage' => $imgPage, 
-											  'visit' => 0));
+											  'visit' => 0,
+											  'owner' => $owner,
+											  'uptime' => time()));
 			if (!isset($_SESSION['username'])){
 				$response = $imgPage;
 				echo $response;
@@ -191,10 +199,13 @@ class Pictoria extends CI_Controller {
 			$arrLink = [];
 			$arrPage = [];
 			foreach ($query->result() as $row){
-				$arrLink[$i] = $row->pathimg . $row->linkimg;
-				$arrPage[$i] = $row->imgpage;
-				$i = $i + 1;
+				if (($row->mode == '0') && ((($row->uptime + $row->expiretime) > time()) || ($row->expiretime == 0))){
+					$arrLink[$i] = $row->pathimg . $row->linkimg;
+					$arrPage[$i] = $row->imgpage;
+					$i = $i + 1;
+				}
 			}
+			$rows = $i;
 			$data = array('arrLink' => $arrLink, 'arrPage' => $arrPage, 'rows' => $rows);
 		}
 		$this->load->view('hotpic', $data);
@@ -216,8 +227,31 @@ class Pictoria extends CI_Controller {
 		$this->load->view("anon_view", $data);
 	}
 	
+	public function modeanon(){
+		$mode = $_POST['mode'];
+		$exptime = implode('', $_POST['exptime']);
+		foreach ($mode as $item){
+			$quer = explode('-', $item);
+			$this->db->where('imgpage', $quer[1]);
+			$this->db->update('images', array('mode' => $quer[0], 'expiretime' => $exptime));
+		}
+		redirect('/pictoria/index/');
+	}
+	
+	public function modeuser(){
+		$mode = $_POST['mode'];
+		foreach ($mode as $item){
+			$quer = explode('-', $item);
+			$this->db->where('imgpage', $quer[1]);
+			$this->db->update('images', array('mode' => $quer[0]));
+		}
+		redirect('/pictoria/view/' . $quer[1]);
+	}	
+	
 	public function view($page){
-		session_start();
+		if (!isset($_SESSION['username'])){
+			session_start();
+		}
 		$this->load->view('header');
 		$query = $this->viewFunc($page);
 		$img = $query->row_array();
@@ -225,14 +259,30 @@ class Pictoria extends CI_Controller {
 			$visitor = $img['visit'] + 1;
 			$this->db->where('ID', $img['ID']);
 			$this->db->update('images', array('visit' => $visitor));
-			$this->load->view('view', $img);
+			$upv = $this->db->get_where('upvote', array('imgID' => $img['ID']));
+			$cool = $upv->num_rows();
+			$data = array('img' => $img, 'upvote' => $cool);
+			$this->load->view('view', $data);
 		}else{
 			$this->load->view("not_found");
 		}
 	}
 	
+	public function cool($imgID){
+		session_start();
+		$upv = $this->db->get_where('upvote', array('imgID' => $imgID, 'userID' => $_SESSION['ID']));
+		$query = $this->db->get_where('images', array('ID' => $imgID));
+		$rows = $query->row_array();
+		$vote = $upv->num_rows();
+		if ($vote != 0){
+			$this->db->delete('upvote', array('imgID' => $imgID, 'userID' => $_SESSION['ID']));
+		}else{
+			$this->db->insert('upvote', array('imgID' => $imgID, 'userID' => $_SESSION['ID']));
+		}
+		redirect('/pictoria/view/' . $rows['imgpage']);
+	}
+	
 	public function viewFunc($page){
-		return $this->db->get_where('images', array('imgpage' => $page), 1);
-		
+		return $this->db->get_where('images', array('imgpage' => $page));
 	}
 }

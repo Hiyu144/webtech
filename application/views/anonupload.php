@@ -11,17 +11,17 @@
 	<body>
 		<div class="container">
 						<div class="panel panel-primary">
-						  <div class="panel-heading">
-						    <h3 class="panel-title">Such stranger. Much alien.</h3>
-						  </div>
-						  <div class="panel-body"> Wow.	Kéo thả vào ô ở dưới coi.					    
-						  </div>
+							<div class="panel-heading">
+								<h3 class="panel-title">Such stranger. Much alien.</h3>
+							</div>
+							<div class="panel-body"> Wow.	Kéo thả vào ô ở dưới coi.					    
+							</div>
 						</div>
 			        </div>
 					<div class="container">
 			        <form action="<?php echo site_url('/pictoria/upload'); ?>" class="dropzone dz-remove" id="myDropzone"></form>
 					<button type="button" class="btn btn-success" id="submit-all">Submit all files</button>
-					<button type="button" class="btn btn-warning" onclick="reload()">Refresh page</button><br><br>
+					<button type="button" class="btn btn-warning" onclick="reload()">Back to homepage</button><br><br>
 					<script>
 						Dropzone.options.myDropzone = {                        
 							addRemoveLinks: true,
@@ -40,14 +40,14 @@
 								this.on("success", function (file, response) {
 									res = res.concat(response).concat("&");
 									if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-										location.href = "<?php echo site_url('/pictoria/anon_view'); ?>/" + res;
+										window.location.href = "<?php echo site_url('/pictoria/anon_view'); ?>/" + res;
 									}
 								});
 							}
 						};
 						
 						function reload() {
-							location.reload();
+							window.location.href = "<?php echo site_url('/pictoria/index/') ?>";
 						};
 					</script>
 				</div>
